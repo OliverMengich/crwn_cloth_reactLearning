@@ -2,6 +2,7 @@ import { signInWithGooglePopup,signInWithGoogleRedirect, createUserDocumentFromA
 import { useEffect } from 'react';
 import { getRedirectResult } from 'firebase/auth';
 // after user authenticates, store his information on firestore
+import SignUpForm from '../../components/sign-up-form/sign-up-form.component';
 const SignIn = ()=>{
     const logGoogleUser = async ()=>{
         const {user} = await signInWithGooglePopup();
@@ -25,8 +26,9 @@ const SignIn = ()=>{
     return(
         <div>
             <h1>Sign In Page</h1>
-            <button onClick={logGoogleUser} >SIgn in with GoogleAuthProvider</button>
-            <button onClick={signInWithGoogleRedirect} >SIgn in with GoogleRedirect</button>
+            <button onClick={logGoogleUser} >Sign in with GoogleAuthProvider</button>
+            {/* <button onClick={signInWithGoogleRedirect} >SIgn in with GoogleRedirect</button> */}
+            <SignUpForm/>
         </div>
     )
 } 

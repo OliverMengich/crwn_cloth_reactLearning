@@ -10,7 +10,7 @@ import './navigation.style.scss';
 const Navigation = ()=>{
     const { currentUser } = useContext(UserContext);
     const {isCartOpen} = useContext(CartDropdownContext);
-    console.log(currentUser);
+    console.log(currentUser ? 'Current user is': 'Current user is not');
     
 	return (
         <Fragment>
@@ -22,7 +22,7 @@ const Navigation = ()=>{
                     <Link className="nav-link" to="/shop">SHOP</Link>
                     {
                         currentUser ? (
-                            <span className="nav-link" onClick={signOutUser}>SIGN OUT</span>
+                            <span className="nav-link" onClick={signOutUser}>{' '}SIGN OUT {' '}</span>
                         ): (<Link className="nav-link" to="/auth">SIGN IN</Link>)
                     }
                     <CartIcon/>

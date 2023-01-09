@@ -25,7 +25,7 @@ export const createUserDocumentFromAuth = async(userAuth, additionalInformation=
     const userDocRef = doc(db,'users', userAuth.uid); //pass in database, collection and identifier
     // console.log(userDocRef);
     const userSnapshot = await getDoc(userDocRef);
-    console.log(userSnapshot.exists()); 
+    console.log('User exists ? ',userSnapshot.exists()); 
     // if user doesn't exist, create/set doc with data from userAuth in my collection
     if(!userSnapshot.exists()){
         const {displayName, email} = userAuth;
@@ -55,4 +55,4 @@ export const signInUserWithEmailAndPassword = async (email,password)=>{
     return await signInWithEmailAndPassword(auth, email,password);
 }
 export const signOutUser = async ()=> await signOut(auth);
-export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth,callback)
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth,callback);

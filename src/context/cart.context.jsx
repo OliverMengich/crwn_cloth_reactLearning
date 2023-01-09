@@ -1,15 +1,13 @@
 import { createContext, useState,useEffect } from "react";
 const addCartItem = (cartItems,productToAdd)=>{
     //find if cartItems contains productToAdd.
-    const existingCartItem = cartItems.filter(cartItem=>cartItem.id===productToAdd.id);
+    const existingCartItem = cartItems.find(cartItem=>cartItem.id===productToAdd.id);
     //if found, increment quanntity
     if (existingCartItem) {
         return cartItems.map(item=>item.id===productToAdd.id ? {...item,quantity:item.quantity+1}: item);
-        // return [...cartItems, {...existingCartItem, quantity: existingCartItem[0].quantity+=1}]
     }
         //return new array with modified cartItems/
         return [...cartItems,{...productToAdd,quantity:1}]
-        // return [...cartItems, {...productToAdd, quantity:1}]
     
     // return cartItems;
 }
@@ -28,7 +26,7 @@ export const CartDropdownProvider = ({children})=>{
         setCartItems(addCartItem(cartItems, productToAdd))
     }
     useEffect(()=>{
-        console.log(cartItems)
+        
         const newCartCount = cartItems.reduce((acc,item)=>{
             acc += item.quantity
             return acc;

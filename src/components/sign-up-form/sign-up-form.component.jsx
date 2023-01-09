@@ -17,6 +17,7 @@ const SignUpForm = ()=>{
     const {setCurrentUser} = useContext(UserContext);
     const handleChange = (event)=>{
         const {name,value} = event.target;
+        console.log(name,value);
         setFormFields({...formFields,[name]:value});
     }
     const resetFormFields = ()=>{
@@ -73,7 +74,7 @@ const SignUpForm = ()=>{
                 <FormInput label="Confirm Password" 
                     required 
                     onChange={handleChange} 
-                    name="confirmpassword"
+                    name="confirmPassword"
                     type="password" 
                     value={confirmPassword} />
                 {/* <button type="submit">Sign Up</button> */}

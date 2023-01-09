@@ -29,7 +29,7 @@ const Navigation = ()=>{
                 </div>
             </div>
             {/* components are all truthy values because they are functions  */}
-            { isCartOpen &&(<CartDropdown/>) } /
+            { isCartOpen &&(<CartDropdown/>) }
             <Outlet/>		
         </Fragment>
     )

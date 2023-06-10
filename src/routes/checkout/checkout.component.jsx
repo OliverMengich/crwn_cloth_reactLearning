@@ -28,7 +28,7 @@ const Checkout = ()=>{
             {
                 cartItems.map(item=>{
                     return (
-                        <CheckoutItem removeItemFromCart={ removeItemFromCart } addItemToCart={addItemToCart} key={item.id} item={item} removeItemHandler={removeItemHandler}/>
+                        <CheckoutItem removeItemFromCart={ removeItemFromCart } addItemToCart={addItemToCart} key={item.id} cartItem={item} removeItemHandler={removeItemHandler}/>
                         // <div key={item.id}>
                         //     <h2>{item.name}</h2>
                         //     <span>{item.quantity}</span>

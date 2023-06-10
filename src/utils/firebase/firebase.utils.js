@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithRedirect,signInWithEmailAndPassword, signInWithPopup, onAuthStateChanged, GoogleAuthProvider, createUserWithEmailAndPassword, signOut} from 'firebase/auth';
-import { getFirestore, doc,getDoc,setDoc } from 'firebase/firestore';
+import { getFirestore, doc,getDoc,setDoc, collection, writeBatch,query,getDocs } from 'firebase/firestore';
 const firebaseConfig = {
     apiKey: "AIzaSyAktCQueWMTJ8BZVKJ3qBWMk0SdwFosTik",
     authDomain: "crowndbapp.firebaseapp.com",
@@ -19,6 +19,32 @@ export const auth = getAuth();
 export const signInWithGooglePopup = ()=> signInWithPopup(auth, provider);
 export const signInWithGoogleRedirect = ()=> signInWithRedirect(auth,provider);
 export const db = getFirestore();
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd)=>{
+    const collectionRef = collection(db, collectionKey);
+    //a batch is a group of writes that can be committed together
+    // it adds documents in form of a transaction
+    const batch = writeBatch(db); // we instanciate a batch and pass in the database
+    // iterate through the objectsToAdd
+    objectsToAdd.forEach(obj=>{
+        // for each of the objects, batchset the document
+        const newDocRef = doc(collectionRef,obj.title.toLowerCase());
+        //we pass in the collectionRef and the title of the object
+        batch.set(newDocRef,obj); //firebase will now point to the newDocRef
+    });
+    await batch.commit();
+    console.log('Batch committed');
+}
+export const getCategoriesAndDocuments = async ()=>{
+    const collectionRef = collection(db,'categories');
+    const q = query(collectionRef); //generate a query
+    const querySnapshot = await getDocs(q);
+    const categoryMap = querySnapshot.docs.reduce((acc,doc)=>{
+        const {title, items} = doc.data();
+        acc[tite.toLowerCase()] = items;
+        return acc;
+    },{});
+    return categoryMap;
+}
 export const createUserDocumentFromAuth = async(userAuth, additionalInformation={})=>{
     if(!userAuth) return;
     // store user who signed In

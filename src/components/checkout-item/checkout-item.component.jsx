@@ -15,7 +15,7 @@ const CheckoutItem = ({cartItem,removeItemHandler, removeItemFromCart, addItemTo
                 <div onClick={increaseItemHandler} className='arrow'>&#10094;</div>
             </span>
             <span className='price'>{price}</span>
-            <span onClick={removeItemHandler} className='remove-button'>&#10005;</span>
+            <span onClick={removeItemHandler.bind(this,cartItem)} className='remove-button'>&#10005;</span>
         </div>
     )
 }

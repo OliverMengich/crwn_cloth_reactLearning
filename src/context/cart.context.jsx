@@ -47,6 +47,7 @@ export const CartDropdownProvider = ({children})=>{
         setCartItems(removeCartItem(cartItems, cartItemToRemove))
     }
     const removeItemHandler = (cartItemToClear)=>{
+        console.log('Item to clear',cartItemToClear)
         setCartItems(clearCartItem(cartItems, cartItemToClear))
     }
     useEffect(()=>{
